@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import com.redesocial.Comida.domain.Post;
 import com.redesocial.Comida.domain.User;
 import com.redesocial.Comida.dto.AuthorDTO;
+import com.redesocial.Comida.dto.CommentDTO;
 import com.redesocial.Comida.repository.PostRepository;
 import com.redesocial.Comida.repository.UserRepository;
 
@@ -42,7 +43,12 @@ public class Instantiation implements CommandLineRunner{
 		Post post2 = new Post(null,sdf.parse("24/07/2021"), "Viajar", "Partiu! jericoacoara",new AuthorDTO(maria));
 		
 		
+		CommentDTO c1 = new CommentDTO("Boa viagem!",sdf.parse("21/03/2021"), new AuthorDTO(alex));
+		CommentDTO c2 = new CommentDTO("Volta quando ?", sdf.parse("22/03/2021"), new AuthorDTO(bob));
+		CommentDTO c3 = new CommentDTO("Legal demais", sdf.parse("25/03/2021"), new AuthorDTO(alex));
 		
+		post1.getComments().addAll(Arrays.asList(c1,c2));
+		post2.getComments().addAll(Arrays.asList(c3));
 		
 		
 		postRepository.saveAll(Arrays.asList(post1,post2));
